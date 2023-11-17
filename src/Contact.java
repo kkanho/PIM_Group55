@@ -14,10 +14,10 @@ class Contact extends PIR {
     @Override
     public String toString() {
         return "ID: " + super.getId() + 
-                ",/nType: " + super.getType() + 
-                "/nName: " + name +
-                "/nAddress: " + address +
-                "/nMobile Number: " + mobile_number;
+                ",\nType: " + super.getType() + 
+                "\nName: " + name +
+                "\nAddress: " + address +
+                "\nMobile Number: " + mobile_number;
     }
 
     //getter and setter

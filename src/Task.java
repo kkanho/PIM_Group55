@@ -13,9 +13,9 @@ class Task extends PIR {
     @Override
     public String toString() {
         return "ID: " + super.getId() + 
-                ",/nType: " + super.getType() + 
-                "/nDescription: " + description +
-                "/nDeadline: " + deadline;
+                ",\nType: " + super.getType() + 
+                "\nDescription: " + description +
+                "\nDeadline: " + deadline;
     }
 
 

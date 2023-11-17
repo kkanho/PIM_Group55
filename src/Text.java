@@ -10,8 +10,9 @@ class Text extends PIR {
     @Override
     public String toString() {
         return "ID: " + super.getId() + 
-                ",/nType: " + super.getType() + 
-                "/nDescription: " + description;
+                ",\nType: " + super.getType() + 
+                "\nDescription: " + description;
+                
     }
 
     //getter and setter
