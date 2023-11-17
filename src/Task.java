@@ -9,8 +9,6 @@ class Task extends PIR {
         this.deadline = deadline;
     }
 
-    
-    
 
     @Override
     public String toString() {

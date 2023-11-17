@@ -8,18 +8,21 @@ public class PIM  {
         mainScreen();
     }
 
+    Scanner scanner = new Scanner(System.in);
+
     public void mainScreen() {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Hello There!");
-        System.out.println("[1] Create a PIR");
-        System.out.println("[2] Remove a PIR");
-        System.out.println("[3] Modified a PIR");
-        System.out.println("[4] Show existing PIRs");
-        System.out.println("[5] Load a PIR");
-        System.out.println("[6] Quit");
-        System.out.print("Select an function: ");
+        //prompt user to select the functionality
+        System.out.println("Welcome to PIM system!!!\n\n"
+                        + "*********************\n"
+                        + "[1] Create a PIR\n"
+                        + "[2] Remove a PIR\n"
+                        + "[3] Modified a PIR\n"
+                        + "[4] Load a PIR\n"
+                        + "[5] Show existing PIRs\n"
+                        + "[6] Quit\n"
+                        + "*********************");
+        System.out.print("Select a function(1 - 6): ");
 
         int userInput = scanner.nextInt();
 
@@ -34,24 +37,71 @@ public class PIM  {
                 modifyExistingPIR(); 
                 break;
             case 4:
-                showPIRs();
+                loadPIR();
                 break;
             case 5: 
-                loadPIR();
+                showPIRs();
                 break;
             case 6: 
                 quit();
                 break;
             default:
-                System.out.println("Please select a valid number"); 
+                System.out.println("Please select a valid number!!!"); 
                 mainScreen();
         }
+
+
     }
 
     public void createPIR() {
 
+        // try {
+
+            //prompt user to select the type of PIR to be created
+            System.out.println("Please select desire PIR type!!!\n"
+                    + "*********************\n"
+                    + "[1] Text\n"
+                    + "[2] Task\n"
+                    + "[3] Content\n"
+                    + "[4] Event\n"
+                    + "[5] Back\n"
+                    + "*********************");
+            System.out.print("Select a type(1 - 5): ");
+            int userInput = scanner.nextInt();
+
+            switch(userInput) {
+                case 1: 
+
+                    break;
+                case 2: 
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5: 
+                    mainScreen();
+                    break;
+
+                default:
+                    System.out.println("Please select a valid number!!!"); 
+                    createPIR();
+            }
+
         //return to main screen
         mainScreen();
+
+        // }   catch(Exception e) {
+
+        //     System.out.println("Error: " + e)
+
+        //     //return to main screen
+        //     mainScreen();
+        // }
+
     }
     public void removePIR() {
 
@@ -77,6 +127,5 @@ public class PIM  {
         System.out.println("Thank you for using this system");
         System.exit(0);
     }
-    
 }
 
