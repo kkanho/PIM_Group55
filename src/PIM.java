@@ -16,8 +16,7 @@ public class PIM  {
     Scanner scannerForLine = new Scanner(System.in);
 
     public void mainScreen() {
-        PIR pirs[];
-        pirs =new PIR[99];
+
         //prompt user to select the functionality
         System.out.println("Welcome to PIM system!!!\n\n"
                         + "*********************\n"
