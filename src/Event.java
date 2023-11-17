@@ -18,6 +18,8 @@ class Event extends PIR {
             return "OFF";
     }
 
+    // Additional methods specific to Event can be added here
+
     @Override
     public String toString() {
         return "ID: " + super.getId() + 
@@ -27,6 +29,28 @@ class Event extends PIR {
                 "/nAlarm: " + isAlarmSet();
     }
 
-    // Additional methods specific to Event can be added here
+    //getter and setter
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public boolean isAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(boolean alarm) {
+        this.alarm = alarm;
+    }
 }

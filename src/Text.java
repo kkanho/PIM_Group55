@@ -13,4 +13,13 @@ class Text extends PIR {
                 ",/nType: " + super.getType() + 
                 "/nDescription: " + description;
     }
+
+    //getter and setter
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -9,6 +9,13 @@ abstract class PIR {
     }
 
 
+
+    @Override
+    public String toString() {
+        return "ID: " + id + 
+                "/nType: " + type;
+    }
+
     //Getter and Setter
     public int getId() {
         return id;
@@ -21,13 +28,6 @@ abstract class PIR {
     }
     public void setType(String type) {
         this.type = type;
-    }
-    
-
-    @Override
-    public String toString() {
-        return "ID: " + id + 
-                "/nType: " + type;
     }
 }
 
