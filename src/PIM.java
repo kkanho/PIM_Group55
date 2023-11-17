@@ -11,7 +11,8 @@ public class PIM  {
     Scanner scanner = new Scanner(System.in);
 
     public void mainScreen() {
-
+        PIR pirs[];
+        pirs =new PIR[99];
         //prompt user to select the functionality
         System.out.println("Welcome to PIM system!!!\n\n"
                         + "*********************\n"
@@ -54,7 +55,7 @@ public class PIM  {
     }
 
     public void createPIR() {
-
+            int pirid= 0;
         // try {
 
             //prompt user to select the type of PIR to be created
@@ -71,7 +72,10 @@ public class PIM  {
 
             switch(userInput) {
                 case 1: 
-
+                    system.out.print("Please input Description")
+                    String Description = scanner.nextString();
+                    pirs[pirid]= new Text(pirid,"Text",Description);
+                
                     break;
                 case 2: 
 
