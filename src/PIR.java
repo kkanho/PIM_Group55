@@ -4,22 +4,15 @@ abstract class PIR {
     private int id;
     private String type;
 
-    //constructor
-    // public PIR() {
-        
-    // }
-
     public PIR(int id, String type) {
         this.id = id;
         this.type = type;
     }
 
 
-
     @Override
     public String toString() {
-        return "ID: " + id + 
-                "\nType: " + type;
+        return "ID: " + id + "Type: " + type + ";";
     }
 
     //Getter and Setter

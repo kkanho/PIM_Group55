@@ -22,11 +22,7 @@ class Event extends PIR {
 
     @Override
     public String toString() {
-        return "ID: " + super.getId() + 
-                ",\nType: " + super.getType() + 
-                "\nDescription: " + description +
-                "\nStart Time: " + start_time +
-                "\nAlarm: " + isAlarmSet();
+        return "ID: " + super.getId() + ", Type: " + super.getType() + ", Description: " + description +", Start Time: " + start_time +", Alarm: " + isAlarmSet() + ";\n";
     }
 
     //getter and setter

@@ -2,9 +2,9 @@
 class Contact extends PIR {
     private String name;
     private String address;
-    private int mobile_number;
+    private String mobile_number;
 
-    public Contact(int id, String type, String name, String address, int mobile_number) {
+    public Contact(int id, String type, String name, String address, String mobile_number) {
         super(id, type);
         this.name = name;
         this.address = address;
@@ -13,11 +13,7 @@ class Contact extends PIR {
 
     @Override
     public String toString() {
-        return "ID: " + super.getId() + 
-                ",\nType: " + super.getType() + 
-                "\nName: " + name +
-                "\nAddress: " + address +
-                "\nMobile Number: " + mobile_number;
+        return "ID: " + super.getId() + ", Type: " + super.getType() + ", Name: " + name +", Address: " + address +", Mobile Number: " + mobile_number + ";\n";
     }
 
     //getter and setter
@@ -37,11 +33,11 @@ class Contact extends PIR {
         this.address = address;
     }
 
-    public int getMobile_number() {
+    public String getMobile_number() {
         return mobile_number;
     }
 
-    public void setMobile_number(int mobile_number) {
+    public void setMobile_number(String mobile_number) {
         this.mobile_number = mobile_number;
     }
 }
