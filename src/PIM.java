@@ -56,6 +56,9 @@ public class PIM  {
                     break;
                 case 6: 
                     showAllPIRs(pirs);
+                    if(!emptyPIM(pirs)){
+                        pressEnterToContinue();
+                    }
                     mainScreen(); //return to main screen
                     break;
                 case 7: 
@@ -135,7 +138,8 @@ public class PIM  {
 
         System.out.print("\033c"); //clear screen
 
-        if(showAllPIRs(pirs)) { //able to show the list of PIRs
+        if(!emptyPIM(pirs)) { // PIRs is not empty
+            showAllPIRs(pirs);
             //prompt user's input
             System.out.print("Please enter PIR id you want to remove: ");
             try {
@@ -149,6 +153,8 @@ public class PIM  {
                 System.out.println("Please enter a valid PIR id!!!");
                 pressEnterToContinue();
             }
+        } else {
+            System.out.println("PIM is empty!!!");
         }
         pressEnterToContinue();
         
@@ -160,7 +166,8 @@ public class PIM  {
 
         System.out.print("\033c"); //clear screen
 
-        if(showAllPIRs(pirs)) {  //able to show the list of PIRs
+        if(!emptyPIM(pirs)) { // PIRs is not empty
+            showAllPIRs(pirs);
             //prompt user's input
             System.out.print("Please enter PIR id you want to modify: ");
             try {
@@ -189,6 +196,9 @@ public class PIM  {
                 System.out.println("Please enter a valid PIR id!!!");
                 pressEnterToContinue();
             }
+        } else {
+            System.out.println("PIM is empty!!!");
+            pressEnterToContinue();
         }
         
         mainScreen(); //return to main screen
@@ -266,7 +276,8 @@ public class PIM  {
                 + "[2] Task\n"
                 + "[3] Contact\n"
                 + "[4] Event\n"
-                + "[5] Back\n"
+                + "[5] Search by keyword\n"
+                + "[6] Back\n"
                 + "*********************");
         System.out.print("Select a type(1 - 5): ");
         try {
@@ -308,6 +319,9 @@ public class PIM  {
                     }
                     break;
                 case 5:
+                    keywordSearch(pirs);
+                    break;
+                case 6:
                     mainScreen(); //return to main screen
                     break;
                 default:
@@ -324,27 +338,35 @@ public class PIM  {
         mainScreen(); //return to main screen
     }
 
-    public boolean showAllPIRs(PIR[] pirs) {
-    
-        boolean isEmptyPIM = true;
+    public void showAllPIRs(PIR[] pirs) {
 
         System.out.print("\033c"); //clear screen
-
-        System.out.println("***** P - I - M *****");
-        for(int i = 0; i < pirs.length; i++){
-            if(pirs[i] != null){
-                System.out.print(pirs[i].toString());
-                isEmptyPIM = false;
-            }
-        }
-        if (isEmptyPIM) {
+        
+        if (emptyPIM(pirs)) {
             System.out.println("PIM is empty!!!");
             pressEnterToContinue();
-            return false;
+        } else {
+            System.out.println("***** P - I - M *****");
+            for(int i = 0; i < pirs.length; i++){
+                if(pirs[i] != null){
+                    System.out.print(pirs[i].toString());
+                }
+            }
+            System.out.println("*********************");
         }
-        System.out.println("*********************");
         
-        return true;
+    }
+
+    public boolean emptyPIM(PIR[] pirs) {
+        boolean emptyPIM = true;
+        
+        for(int i = 0; i < pirs.length; i++){
+            if(pirs[i] != null){
+                emptyPIM = false;
+            }
+        }
+
+        return emptyPIM;
     }
 
     public void exportAllPIRs(PIR[] pirs) {
@@ -435,13 +457,65 @@ public class PIM  {
         String Description3 = scannerForLine.nextLine();
         System.out.print("Please input start time: ");
         String start_time = scannerForLine.nextLine();
-        System.out.println("(Alarm default No)");
         System.out.print("Alarm(Y/N): ");
         String alarm = scannerForLine.nextLine();
-        pirs[id]= new Event(id,"Event", Description3, start_time, alarm.contains("Y")?true:false);
+        pirs[id]= new Event(id,"Event", Description3, start_time, alarm.contains("Y")?true:false || alarm.contains("y")?true:false);
         System.out.println("PIR(event) " + func + " successful!!!");
         pressEnterToContinue();
     }
-    
+    public void keywordSearch(PIR[] pirs) {
+        System.out.print("Please input keyword(you can use operator ||, &&, !): ");
+        String keyword = scannerForLine.nextLine();
+        boolean found = false;
+
+        if(emptyPIM(pirs)){
+            System.out.println("PIM is empty!!!");
+            pressEnterToContinue();
+            mainScreen();
+        } else {
+            if (keyword.contains("||")) {
+                String frontkey = keyword.substring(0,keyword.indexOf("||"));
+                String backkey =  keyword.substring(keyword.indexOf("||")+2,keyword.length());
+                    for(int i = 0; i < pirs.length; i++){ if(pirs[i]!=null){
+                        if( pirs[i].toString().contains(frontkey)||pirs[i].toString().contains(backkey)){
+                            found = true;
+                            System.out.print(pirs[i].toString());
+                        }}
+                    }
+            } else if(keyword.contains("&&")) {
+                String frontkey = keyword.substring(0,keyword.indexOf("&&"));
+                String backkey =  keyword.substring(keyword.indexOf("&&")+2,keyword.length());
+                    for(int i = 0; i < pirs.length; i++){if(pirs[i]!=null){
+                        if( pirs[i].toString().contains(frontkey)&&pirs[i].toString().contains(backkey)){
+                            found = true;
+                            System.out.print(pirs[i].toString());
+                        }}
+                    }
+            } else if( keyword.substring(0,1).contains("!")) {
+                String backkey =  keyword.substring(keyword.indexOf("!")+1,keyword.length());
+                for(int i = 0; i < pirs.length; i++){if(pirs[i]!=null){
+                        if(!(pirs[i].toString().contains(backkey))){
+                            found = true;
+                            System.out.print(pirs[i].toString());
+                        }}
+                    }
+            } else { //normal key word search
+                for(int i = 0; i < pirs.length; i++){if(pirs[i]!=null){
+                    if(pirs[i].toString().contains(keyword)){
+                        found = true;
+                        System.out.print(pirs[i].toString());
+                    }}
+                }
+            }
+
+            if(!found){
+                System.out.println("Not found!!!");
+            }
+        }
+
+        pressEnterToContinue();
+        //return to main screen
+        mainScreen();
+    }
 }
 
