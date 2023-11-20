@@ -5,6 +5,7 @@ import java.util.*;
 public class PIM  {
 
     //init
+    // ArrayList<String> pirs = new ArrayList<String>();
     PIR pirs[] = new PIR[99];
     int pir_id = 0;
 
@@ -34,39 +35,45 @@ public class PIM  {
                         + "[8] Quit\n"
                         + "*********************");
         System.out.print("Select a function(1 - 8): ");
-        int userInput = scanner.nextInt();
+        try {
+            int userInput = scanner.nextInt();
 
-        switch(userInput) {
-            
-            case 1: 
-                createPIR(pirs, pir_id);
-                break;
-            case 2: 
-                removePIR(pirs);
-                break;
-            case 3:
-                modifyExistingPIR(pirs, pir_id);
-                break;
-            case 4:
-                loadPIR(pirs, pir_id);
-                break;
-            case 5: 
-                searchPIRByType(pirs);
-                break;
-            case 6: 
-                showAllPIRs(pirs);
-                pressEnterToContinue();
-                mainScreen(); //return to main screen
-                break;
-            case 7: 
-                exportAllPIRs(pirs);
-                break;
-            case 8: 
-                quit();
-                break;
-            default:
-                System.out.println("Please select a valid number!!!"); 
-                mainScreen(); //return to main screen
+            switch(userInput) {
+                case 1: 
+                    createPIR(pirs, pir_id);
+                    break;
+                case 2: 
+                    removePIR(pirs);
+                    break;
+                case 3:
+                    modifyExistingPIR(pirs, pir_id);
+                    break;
+                case 4:
+                    loadPIR(pirs, pir_id);
+                    break;
+                case 5: 
+                    searchPIRByType(pirs);
+                    break;
+                case 6: 
+                    showAllPIRs(pirs);
+                    mainScreen(); //return to main screen
+                    break;
+                case 7: 
+                    exportAllPIRs(pirs);
+                    break;
+                case 8: 
+                    quit();
+                    break;
+                default:
+                    System.out.println("Please select a valid number!!!"); 
+                    pressEnterToContinue();
+                    mainScreen(); //return to main screen
+            }
+        } catch (Exception e){
+            scanner.next();
+            System.out.println("Please input function(1 - 8)!!!");
+            pressEnterToContinue();
+            mainScreen(); //return to main screen
         }
     }
 
@@ -84,33 +91,42 @@ public class PIM  {
                 + "[5] Back\n"
                 + "*********************");
         System.out.print("Select a type(1 - 5): ");
-        int userInput = scanner.nextInt();
 
-        switch(userInput) {
-            case 1:
-                createTextPIR("create", pir_id);
-                updatePIRId();
-                break;
-            case 2: 
-                createTaskPIR("create", pir_id);
-                updatePIRId();
-                break;
-            case 3:
-                createContactPIR("create", pir_id);
-                updatePIRId();
-                break;
-            case 4:
-                createEventPIR("create", pir_id);
-                updatePIRId();
-                break;
-            case 5: 
-                mainScreen(); //return to main screen
-                break;
+        try {
+            int userInput = scanner.nextInt();
+            switch(userInput) {
+                case 1:
+                    createTextPIR("create", pir_id);
+                    updatePIRId();
+                    break;
+                case 2: 
+                    createTaskPIR("create", pir_id);
+                    updatePIRId();
+                    break;
+                case 3:
+                    createContactPIR("create", pir_id);
+                    updatePIRId();
+                    break;
+                case 4:
+                    createEventPIR("create", pir_id);
+                    updatePIRId();
+                    break;
+                case 5: 
+                    mainScreen(); //return to main screen
+                    break;
 
-            default:
-                System.out.println("Please select a valid number!!!"); 
-                createPIR(pirs, pir_id);
+                default:
+                    System.out.println("Please select a valid number!!!"); 
+                    createPIR(pirs, pir_id);
+            }
+        }catch (Exception e){
+            scanner.next();
+            System.out.println("Please input type(1 - 5)!!!");
+            pressEnterToContinue();
+            createPIR(pirs, pir_id);
         }
+
+
 
         mainScreen(); //return to main screen
     }
@@ -122,11 +138,17 @@ public class PIM  {
         if(showAllPIRs(pirs)) { //able to show the list of PIRs
             //prompt user's input
             System.out.print("Please enter PIR id you want to remove: ");
-            int intID = scanner.nextInt();
-            
-            //remove
-            pirs[intID] = null;
-            System.out.println("Removed!");
+            try {
+                int intID = scanner.nextInt();
+
+                //remove
+                pirs[intID] = null;
+                System.out.println("Removed!");
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("Please enter a valid PIR id!!!");
+                pressEnterToContinue();
+            }
         }
         pressEnterToContinue();
         
@@ -141,24 +163,31 @@ public class PIM  {
         if(showAllPIRs(pirs)) {  //able to show the list of PIRs
             //prompt user's input
             System.out.print("Please enter PIR id you want to modify: ");
-            int modifyID = scanner.nextInt();
-            if (pirs[modifyID] == null){
-                System.out.println("That PIR is empty");
-                pressEnterToContinue();
-            } else {
-                if(pirs[modifyID].getType() == "Text") {
-                    System.out.println(pirs[modifyID].toString());
-                    createTextPIR("modify", modifyID);
-                } else if (pirs[modifyID].getType() == "Task") {
-                    System.out.println(pirs[modifyID].toString());
-                    createTaskPIR("modify", modifyID);
-                } else if (pirs[modifyID].getType() == "Contact") {
-                    System.out.println(pirs[modifyID].toString());
-                    createContactPIR("modify", modifyID);
-                } else if (pirs[modifyID].getType() == "Event") {
-                    System.out.println(pirs[modifyID].toString());
-                    createEventPIR("modify", modifyID);
+            try {
+                int modifyID = scanner.nextInt();
+            
+                if (pirs[modifyID] == null){
+                    System.out.println("That PIR is empty");
+                    pressEnterToContinue();
+                } else {
+                    if(pirs[modifyID].getType() == "Text") {
+                        System.out.println(pirs[modifyID].toString());
+                        createTextPIR("modify", modifyID);
+                    } else if (pirs[modifyID].getType() == "Task") {
+                        System.out.println(pirs[modifyID].toString());
+                        createTaskPIR("modify", modifyID);
+                    } else if (pirs[modifyID].getType() == "Contact") {
+                        System.out.println(pirs[modifyID].toString());
+                        createContactPIR("modify", modifyID);
+                    } else if (pirs[modifyID].getType() == "Event") {
+                        System.out.println(pirs[modifyID].toString());
+                        createEventPIR("modify", modifyID);
+                    }
                 }
+            } catch (Exception e) {
+                scanner.next();
+                System.out.println("Please enter a valid PIR id!!!");
+                pressEnterToContinue();
             }
         }
         
@@ -240,51 +269,56 @@ public class PIM  {
                 + "[5] Back\n"
                 + "*********************");
         System.out.print("Select a type(1 - 5): ");
-        int userInput = scanner.nextInt();
-        
-        String searchType = "";
-        
-        switch (userInput) {
-            case 1:
-                searchType = "Text";
-                for(int i = 0; i < pirs.length; i++){
-                    if(pirs[i] != null && pirs[i].getType() == searchType){
-                        System.out.print(pirs[i].toString());
+        try {
+            int userInput = scanner.nextInt();
+            
+            String searchType = "";
+            
+            switch (userInput) {
+                case 1:
+                    searchType = "Text";
+                    for(int i = 0; i < pirs.length; i++){
+                        if(pirs[i] != null && pirs[i].getType() == searchType){
+                            System.out.print(pirs[i].toString());
+                        }
                     }
-                }
-                break;
-            case 2:
-                searchType = "Task";
-                for(int i = 0; i < pirs.length; i++){
-                    if(pirs[i] != null && pirs[i].getType() == searchType){
-                        System.out.print(pirs[i].toString());
+                    break;
+                case 2:
+                    searchType = "Task";
+                    for(int i = 0; i < pirs.length; i++){
+                        if(pirs[i] != null && pirs[i].getType() == searchType){
+                            System.out.print(pirs[i].toString());
+                        }
                     }
-                }
-                break;
-            case 3:
-                searchType = "Contact";
-                for(int i = 0; i < pirs.length; i++){
-                    if(pirs[i] != null && pirs[i].getType() == searchType){
-                        System.out.print(pirs[i].toString());
+                    break;
+                case 3:
+                    searchType = "Contact";
+                    for(int i = 0; i < pirs.length; i++){
+                        if(pirs[i] != null && pirs[i].getType() == searchType){
+                            System.out.print(pirs[i].toString());
+                        }
                     }
-                }
-                break;
-            case 4:
-                searchType = "Event";
-                for(int i = 0; i < pirs.length; i++){
-                    if(pirs[i] != null && pirs[i].getType() == searchType){
-                        System.out.print(pirs[i].toString());
+                    break;
+                case 4:
+                    searchType = "Event";
+                    for(int i = 0; i < pirs.length; i++){
+                        if(pirs[i] != null && pirs[i].getType() == searchType){
+                            System.out.print(pirs[i].toString());
+                        }
                     }
-                }
-                break;
-            case 5:
-                mainScreen(); //return to main screen
-                break;
-            default:
-                System.out.println("Invalid type!");
-                break;
+                    break;
+                case 5:
+                    mainScreen(); //return to main screen
+                    break;
+                default:
+                    System.out.println("Invalid type!");
+                    break;
+            }
+        } catch (Exception e) {
+            scanner.next();
+            System.out.println("Please enter a valid PIR id!!!");
+            pressEnterToContinue();
         }
-
         pressEnterToContinue();
         
         mainScreen(); //return to main screen
@@ -305,6 +339,7 @@ public class PIM  {
         }
         if (isEmptyPIM) {
             System.out.println("PIM is empty!!!");
+            pressEnterToContinue();
             return false;
         }
         System.out.println("*********************");
@@ -327,17 +362,15 @@ public class PIM  {
             e.printStackTrace();
         }
         try{
-        
-        FileOutputStream fos = new FileOutputStream(path,true);
-        for(int i = 0; i < pirs.length; i++){
-            if(pirs[i] != null){
-            byte b[]=pirs[i].toString().getBytes();
-            fos.write(b);}
-        }
-        fos.close();
-        System.out.println("Saved");
-        } catch(Exception e)
-        {
+            FileOutputStream fos = new FileOutputStream(path,true);
+            for(int i = 0; i < pirs.length; i++){
+                if(pirs[i] != null){
+                byte b[]=pirs[i].toString().getBytes();
+                fos.write(b);}
+            }
+            fos.close();
+            System.out.println("Saved");
+        } catch(Exception e) {
             System.out.println("not Saved");
             e.printStackTrace();
         }
