@@ -1,7 +1,7 @@
-ID: 0, Type: Text, Description: newnew text1;
-ID: 1, Type: Task, Description: newnew task1, Deadline: 11/11;
-ID: 2, Type: Contact, Name: kan, Address: qwetrwewr, Mobile Number: 12312312;
-ID: 3, Type: Event, Description: newnew event, Start Time: 11AM, Alarm: OFF;
-ID: 4, Type: Text, Description: text1;
+ID: 0, Type: Text, Description: text1;
+ID: 1, Type: Task, Description: task1, Deadline: 11/11;
+ID: 2, Type: Contact, Name: kan, Address: this is theAddress, Mobile Number: 12312312;
+ID: 3, Type: Event, Description: event, Start Time: 11AM, Alarm: OFF;
+ID: 4, Type: Event, Description: AlarmOn_Event, Start Time: 11AM, Alarm: ON;
 ID: 5, Type: Text, Description: text2;
 ID: 6, Type: Text, Description: text3;
